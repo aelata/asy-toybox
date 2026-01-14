@@ -4,13 +4,13 @@ This repository contains [Asymptote](https://github.com/vectorgraphics/asymptote
 ## Module
 * colspc.asy - HSV, HSL, HSI, HSY, CIELAB, CIELUV, OKLab color space
 * colpal.asy - color palette for domain coloring
-  + [gallery](colpal.html)
+  + [gallery](colpal.md)
 * domcol.asy - domain coloring of complex functions
-  + [usage](domcol_usage.html)
-  + [gallery](domcol_gallery.html)
+  + [usage](domcol_usage.md)
+  + [gallery](domcol_gallery.md)
 * isoline.asy - isoline for complex argument (phase)
 * nmmin.asy - Nelder-Mead minimization
-  + [example](nmmin.html)
+  + [example](nmmin.md)
 
 ## License
 The scripts in this repository are licensed under the MIT No Attribution (MIT-0) License.
