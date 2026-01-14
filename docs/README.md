@@ -13,7 +13,7 @@ This repository contains [Asymptote](https://github.com/vectorgraphics/asymptote
   + [example](nmmin.md)
 
 ## License
-The scripts in this repository are licensed under the MIT No Attribution (MIT-0) License.
+The Asymptote scripts in this repository are licensed under the MIT No Attribution (MIT-0) License.
 [https://opensource.org/license/mit-0](https://opensource.org/license/mit-0)
 
 ## Copyright
