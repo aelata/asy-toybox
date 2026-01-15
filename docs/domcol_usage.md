@@ -359,7 +359,7 @@ add(pic, (0, 0));
 
 ---
 
-#### Cumulative weighted histogram
+### Cumulative weighted histogram
 The `image` function defined in `domcol.asy` returns an integer array. The array is the cumulative histogram of a weighted histogram of $l \in [0, 1)$ with a weight of 8 for each point. The specified lower and upper limits are encoded with a weight of 1 and 2 in the histogram. A reverse flag is encoded with a weight 4 at the last bin.
 
 A cumulative distribution function is obtained from the cumulative weighted histogram,  which also provides approximate quantiles.
