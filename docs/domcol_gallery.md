@@ -3,7 +3,7 @@ $$
 f(z)=z
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -38,7 +38,7 @@ f(z) = (2 + i)z + \overline{z}
 \end{gather*}
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -66,7 +66,7 @@ $$
 f(z) = \frac{(z^2 - 1)(z - 2 - i)^2}{z^2 + 2 + 2i}
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -95,7 +95,7 @@ $$
 f(z)=e^z
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -124,7 +124,7 @@ $$
 f(z)=\cos(z)=\frac{e^{iz} + e^{-iz}}{2}
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -152,7 +152,7 @@ $$
 f(z)=\sin(z)=\frac{e^{iz} - e^{-iz}}{2i}
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -182,7 +182,7 @@ $$
 f(z)=\cosh(z) = \frac{e^z + e^{-z}}{2}
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -210,7 +210,7 @@ $$
 f(z)=\sinh(z) = \frac{e^z - e^{-z}}{2}
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -240,7 +240,7 @@ $$
 f(z)=\log{z}
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -267,7 +267,7 @@ $$
 f(z)=\arctan{z}=\frac{1}{2i}\log{\frac{1+iz}{1-iz}}
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -294,7 +294,7 @@ $$
 f(z)=\textrm{arctanh}\,{z}=\frac{1}{2}\log{\frac{1+z}{1-z}}
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -324,7 +324,7 @@ $$
 $$
 f(z)=z^2
 $$
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -350,7 +350,7 @@ draw(box(a, b));
 $$
 f(z)=z^{1/2}=\sqrt{z}
 $$
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -376,7 +376,7 @@ draw(box(a, b));
 $$
 f(z)=z^i
 $$
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -403,7 +403,7 @@ $$
 f(z)=z^{2+i}
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -431,7 +431,7 @@ $$
 f(z)=\Gamma(z)
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
@@ -460,7 +460,7 @@ $$
 f(z)=\frac{(iz)^{-8} - (iz)^{-1}}{(iz)^{-1} - 1}
 $$
 
-```cpp {cmd=env args=[asyco] output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
 import domcol;
 
 size(15cm);
