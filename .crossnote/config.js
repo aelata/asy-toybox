@@ -1,8 +1,8 @@
 ({
   katexConfig: {
   "macros": {
-    "\\ev": "\\langle#1\\rangle",
-    "\\L": "\\lVert#1\\rVert",
+    "\\E": "{\\left\\langle#1\\right\\rangle}",
+    "\\L": "{\\left\\lVert#1\\right\\rVert}",
   }
 },
   

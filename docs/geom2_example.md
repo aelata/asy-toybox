@@ -19,17 +19,17 @@ $$
 $$
 
 $$
-\bm{a}_{\parallel\bm{m}} = \ev{\bm{m},\bm{a}} \bm{m}
+\bm{a}_{\parallel\bm{m}} = \E{\bm{m},\bm{a}} \bm{m}
 $$
 
 $$
 \bm{a}_{\perp\bm{m}} = \bm{a} - \bm{a}_{\parallel\bm{m}}
-  = \bm{a} - \ev{\bm{m},\bm{a}} \bm{m} = (\bm{m}\times\bm{a})\times\bm{m}
+  = \bm{a} - \E{\bm{m},\bm{a}} \bm{m} = (\bm{m}\times\bm{a})\times\bm{m}
 $$
 
 $$
 \bm{a}_{\top\bm{m}} = \bm{a} - 2\bm{a}_{\perp\bm{m}}
-  = -\bm{a} + 2\ev{\bm{m},\bm{a}} \bm{m}
+  = -\bm{a} + 2\E{\bm{m},\bm{a}} \bm{m}
 $$
 
 ```cpp {cmd=env args=[asyco -tex pdflatex] continue=prep output=html output_first}
@@ -57,7 +57,7 @@ $$
 $$
 
 $$
-\bm{x}_l = (\bm{x}_1)_{\perp\bm{m}} = {\bm{x}_1} - \ev{\bm{m},\bm{x}_1}\bm{m}
+\bm{x}_l = (\bm{x}_1)_{\perp\bm{m}} = {\bm{x}_1} - \E{\bm{m},\bm{x}_1}\bm{m}
 $$
 
 ```cpp {cmd=env args=[asyco -tex pdflatex] continue=prep output=html output_first}
