@@ -20,7 +20,7 @@ draw(Label("$z$", EndPoint), -2Z -- 3Z, axispen, Arrow3);
 
 #### Plane
 $$
-\varPi: \ev{\bm{n}, \bm{x} - \bm{x}_\varPi} = 0
+\varPi: \E{\bm{n}, \bm{x} - \bm{x}_\varPi} = 0
 $$
 
 $$
@@ -28,7 +28,7 @@ $$
 $$
 
 $$
-\bm{x}_\varPi = \ev{\bm{n}, \bm{x}_1}\bm{n}
+\bm{x}_\varPi = \E{\bm{n}, \bm{x}_1}\bm{n}
 $$
 
 ```cpp {cmd=env args=[asyco] continue=prep output=html output_first}
@@ -63,17 +63,17 @@ dot("$\bm{x}$", P.intersect(line3.z(1.5, -0.75)));
 $$
 \bm{a}_{\parallel\varPi}
   = \bm{a} + (\bm{x}_\varPi - \bm{a})_{\parallel\bm{n}}
-  = \bm{x}_\varPi + \bm{a} - \ev{\bm{n}, \bm{a}}\bm{n}
+  = \bm{x}_\varPi + \bm{a} - \E{\bm{n}, \bm{a}}\bm{n}
 $$
 
 $$
 \bm{a}_{\top\varPi}
   = \bm{a} + 2(\bm{x}_\varPi - \bm{a})_{\parallel\bm{n}}
-  = 2\bm{x}_\varPi + \bm{a} - 2\ev{\bm{n}, \bm{a}}\bm{n}
+  = 2\bm{x}_\varPi + \bm{a} - 2\E{\bm{n}, \bm{a}}\bm{n}
 $$
 
 $$
-d = \ev{\bm{n}, \bm{a} - \bm{x}_\varPi}
+d = \E{\bm{n}, \bm{a} - \bm{x}_\varPi}
 $$
 
 ```cpp {cmd=env args=[asyco] continue=prep output=html output_first}
@@ -104,15 +104,15 @@ draw("$\varPi$", point(rect, 0), 3dir(15));
 
 #### Nearest points
 $$
-\bm{p} = \bm{x}_l + \frac{\ev{\bm{m},\bm{x}'_l}+\ev{\bm{m}',\bm{m}}\ev{\bm{m}',\bm{x}_l}}{\L{\bm{m}\times\bm{m}'}^2} \bm{m}
+\bm{p} = \bm{x}_l + \frac{\E{\bm{m},\bm{x}'_l}+\E{\bm{m}',\bm{m}}\E{\bm{m}',\bm{x}_l}}{\L{\bm{m}\times\bm{m}'}^2} \bm{m}
 $$
 
 $$
-\bm{p}' = \bm{x}'_l - \frac{\ev{\bm{m}',\bm{x}_l}+\ev{\bm{m},\bm{m}'}\ev{\bm{m},\bm{x}'_l}}{\L{\bm{m}\times\bm{m}'}^2} \bm{m}'
+\bm{p}' = \bm{x}'_l - \frac{\E{\bm{m}',\bm{x}_l}+\E{\bm{m},\bm{m}'}\E{\bm{m},\bm{x}'_l}}{\L{\bm{m}\times\bm{m}'}^2} \bm{m}'
 $$
 
 $$
-d = \ev{\frac{\bm{m}\times\bm{m}'}{\L{\bm{m}\times\bm{m}'}},\bm{x}'_l - \bm{x}_l}
+d = \E{\frac{\bm{m}\times\bm{m}'}{\L{\bm{m}\times\bm{m}'}},\bm{x}'_l - \bm{x}_l}
 $$
 
 ```cpp {cmd=env args=[asyco] continue=prep output=html output_first}
