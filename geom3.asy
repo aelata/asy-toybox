@@ -1,7 +1,7 @@
 // geom3.asy - miscellaneous 3D geometry functions
 
 // (c) 2025-2026 aelata
-// This software is licensed under the MIT No Attribution license (MIT-0).
+// This script is licensed under the MIT No Attribution license (MIT-0).
 // https://opensource.org/license/mit-0
 
 import solids; // revolution for dot3

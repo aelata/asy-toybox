@@ -1,7 +1,7 @@
 // colpath.asy - draw path with color gradient
 
 // (c) 2025-2026 aelata
-// This software is licensed under the MIT No Attribution (MIT-0) License.
+// This script is licensed under the MIT No Attribution (MIT-0) License.
 // https://opensource.org/license/mit-0
 
 import three;

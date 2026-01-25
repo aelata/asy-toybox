@@ -1,7 +1,7 @@
 // geom2.asy - miscellaneous 2D geometry functions
 
 // (c) 2025-2026 aelata
-// This software is licensed under the MIT No Attribution license (MIT-0).
+// This script is licensed under the MIT No Attribution license (MIT-0).
 // https://opensource.org/license/mit-0
 
 real[] reals(pair a) { // cast may cause ambiguity
