@@ -1,7 +1,7 @@
 // colspc.asy - HSV, HSL, HSI, HSY, CIELAB, CIELUV, OKLab color space
 
-// (c) 2025 aelata
-// This software is licensed under the MIT No Attribution (MIT-0) License.
+// (c) 2025-2026 aelata
+// This script is licensed under the MIT No Attribution (MIT-0) License.
 // https://opensource.org/license/mit-0
 
 // Most of the code below is based on the following textbook:

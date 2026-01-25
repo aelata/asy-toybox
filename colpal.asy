@@ -1,7 +1,7 @@
 // colpal.asy - color palette
 
-// (c) 2025 aelata
-// This software is licensed under the MIT No Attribution license (MIT-0).
+// (c) 2025-2026 aelata
+// This script is licensed under the MIT No Attribution license (MIT-0).
 // https://opensource.org/license/mit-0
 
 import colspc;
