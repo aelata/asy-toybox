@@ -12,7 +12,7 @@ pair f(pair z) { return z; }
 
 pair a = (-5, -5), b = (5, 5);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -47,7 +47,7 @@ pair f(pair z) { return (0, 0, 1, -1, 1, 3) * z; }
 
 pair a = (-5, -5), b = (5, 5);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -75,7 +75,7 @@ pair f(pair z) { return (z * z - 1) * (z - (2, 1))**2 / (z * z + (2, 2)); }
 
 pair a = (-5, -5), b = (5, 5);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -104,7 +104,7 @@ pair f(pair z) { return exp(z); }
 
 pair a = (-5, -5), b = (5, 5);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -133,7 +133,7 @@ pair f(pair z) { return cos(z); }
 
 pair a = (-5, -5), b = (5, 5);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -161,7 +161,7 @@ pair f(pair z) { return sin(z); }
 
 pair a = (-5, -5), b = (5, 5);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -191,7 +191,7 @@ pair f(pair z) { return (exp(z) + exp(-z)) / 2; }
 
 pair a = (-5, -5), b = (5, 5);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -219,7 +219,7 @@ pair f(pair z) { return (exp(z) - exp(-z)) / 2; }
 
 pair a = (-5, -5), b = (5, 5);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -249,7 +249,7 @@ pair f(pair z) { return log(z); }
 
 pair a = (-5, -5), b = (5, 5);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -276,7 +276,7 @@ pair f(pair z) { z = (0, 1) * z; return 1 / (0, 0.5) * log((1 + z) / (1 - z)); }
 
 pair a = (-3, -3), b = (3, 3);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -303,7 +303,7 @@ pair f(pair z) { return 0.5 * log((1 + z) / (1 - z)); }
 
 pair a = (-3, -3), b = (3, 3);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -333,7 +333,7 @@ pair f(pair z) { return z * z; }
 
 pair a = (-3, -3), b = (3, 3);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=3));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=3));
@@ -359,7 +359,7 @@ pair f(pair z) { return sqrt(z); }
 
 pair a = (-3, -3), b = (3, 3);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=3));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=3));
@@ -385,7 +385,7 @@ pair f(pair z) { return z**(0,1); }
 
 pair a = (-3, -3), b = (3, 3);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=3));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=3));
@@ -412,7 +412,7 @@ pair f(pair z) { return z^(2, 1); }
 
 pair a = (-3, -3), b = (3, 3);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=3));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=3));
@@ -440,7 +440,7 @@ pair f(pair z) { return gamma(z); }
 
 pair a = (-5, -5), b = (5, 5);
 real c = 0;
-pair[][] z = seq(f, a, b);
+pair[][] z = map_rect(f, a, b);
 int[] H = image(z, a, b, c, reverse=true);
 xaxis(Bottom, a.x, b.x, RightTicks(N=2, n=5));
 yaxis(Left, a.y, b.y, LeftTicks(N=2, n=5));
@@ -471,7 +471,7 @@ pair f(pair z) { z *= (0, 1); return (z**(-8) - 1 / z) / (1 / z - 1); }
 
 pair a = (-2, -2), b = (2, 2);
 real c = 0;
-pair[][] z = seq(f, a, b, 500, 500);
+pair[][] z = map_rect(f, a, b, 500, 500);
 int[] H = image(f, a, b, c, pal);
 xaxis(YEquals(a.y), xmin=a.x, xmax=b.x, RightTicks(N=2, n=2));
 yaxis(XEquals(a.x), ymin=a.y, ymax=b.y, LeftTicks(N=2, n=2));

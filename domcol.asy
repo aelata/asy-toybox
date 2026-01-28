@@ -16,7 +16,7 @@ private pen _pal(real l, real t) { return palLuv(l, t); } // default palette
 private int _NX = 500;   // # of points along real-axis
 private int _NZ = 10000; // # of histogram bins along modulus-axis
 
-pair[][] seq(
+pair[][] map_rect(
   pair f(pair), explicit pair a, explicit pair b, int nx=_NX, int ny=nx)
 {
   pair[][] z = new pair[nx][ny];
@@ -101,7 +101,7 @@ real rfn(real l, real s) {
   }
 }
 
-pair[][] seq(
+pair[][] map_circ(
   pair f(pair), real rmax=infinity, real c=1, real tmax=2pi,
   int nx=_NX, int ny=nx, bool clip=true)
 {
@@ -333,7 +333,8 @@ int[] image(
 {
   if (linear == false && rmax == 0)
     rmax = infinity;
-  pair[][] z = (linear) ? seq(f, a, b, nx, ny) : seq(f, rmax, c, nx, ny);
+  pair[][] z = (linear) ?
+    map_rect(f, a, b, nx, ny) : map_circ(f, rmax, c, nx, ny);
   return image(
     pic, z, a, b, s, H, nz, autoscale, r, pal, reverse, background);
 }
@@ -622,70 +623,4 @@ void isophase(
   explicit pair a=(-1, -1), explicit pair b=(1, 1), int nt=6)
 {
   isophase(pic, map(rad, z), a, b, nt);
-}
-
-int _NR = 200, _NT = 360;
-pair[][] rtseq( // vs xyseq
-  pair f(pair), explicit pair a=(0, 0), pair b=(infinity, 2pi), real c=1,
-  int nr=_NR, int nt=_NT)
-{
-  pair[][] z = new pair[nr][nt];
-  if (c != 0) {
-    a = (lfn(a.x, c), a.y);
-    b = (lfn(b.x, c), b.y);
-  }
-  for (int i: sequence(nr)) {
-    real r = interp(a.x, b.x, (i + 0.5) / nr);
-    if (c != 0)
-      r = rfn(r, c);
-    for (int j: sequence(nt)) {
-      real t = interp(a.y, b.y, (j + 0.5) / nt);
-      z[i][j] = f((r * cos(t), r * sin(t)));
-    }
-  }
-  return z;
-}
-
-private void _rtimage(
-  picture pic=currentpicture,
-  real[][] l, real[][] t, int[] H, pair a=(0, 0pi), pair b=(1, 2*pi),
-  pen pal(real, real), bool reverse, pen background)
-{
-  int nl = l.length, nt = l[0].length;
-  pen[] cpal = new pen[nl * nt];
-  for (int i: sequence(nl)) {
-    for (int j: sequence(nt)) {
-      if (isnan(l[i][j]) || isnan(t[i][j])) {
-        cpal[i * nt + j] = background;
-      } else {
-        real lij = cdf(l[i][j], H);
-        cpal[i * nt + j] = pal(reverse ? 1.0 - lij : lij, degrees(t[i][j]));
-      }
-    }
-  }
-  triple f(pair t) { return (t.x * cos(t.y), t.x * sin(t.y), t.y); }
-  surface s = surface(f, a, b, l.length, l[0].length);
-  draw(pic, s, cpal);
-}
-
-int[] rtimage(
-  picture pic=currentpicture,
-  real[][] r, real[][] t, real s=0, int[] H=new int[], int nz=_NZ,
-  bool autoscale=false, pair rlim=(0, infinity),
-  pen pal(real, real)=_pal, bool3 reverse=default, pen background=white)
-{
-  real[][] l = map(new real(pair r) { return lfn(r, s); }, r);
-  if (H.length == 0) {
-    H = Hist(l, s, nz, autoscale, rlim);
-    if (reverse == default)
-      reverse = false;
-    if (reverse)
-      H[H.length - 1] = OR(H[H.length - 1], _MASK_REVERSE);
-  } else {
-    if (reverse == default)
-      reverse = (AND(H[H.length - 1], _MASK_REVERSE) != 0);
-  }
-  if (pic != null)
-    _rtimage(pic, l, t, H, pal, reverse, background);
-  return H;
 }
