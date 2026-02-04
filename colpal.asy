@@ -6,72 +6,59 @@
 
 import colspc;
 
-private pen _palcyl2(
-  pen pal(real, real, real), real l, real t, real a, real b, real c)
-{
-  l = min(max(l, 0), 1);
-  real L = 2 * b * l + (c - b);
-  l = 2 * l - 1; // [0, 1] to [-1, 1]
-  real S = a * sqrt(max(1 - l * l, 0));
-  return pal(t, S, L);
-}
-
-private pen _palcyln(
+private pen _palcyl(
   pen pal(real, real, real), real l, real t, real a, real b, real c, real n)
 {
-  l = min(max(l, 0), 1);
-  real L = 2 * b * l + (c - b);
-  real S = a * max(1 - abs((L - c) / b)**n, 0)**(1/n); // n from super ellipse
+  l = min(max(0, l), 1);
+  real S, L = 2 * b * l + (c - b);
+  if (n == 2) {
+    l = 2 * l - 1; // [0, 1] to [-1, 1]
+    S = a * sqrt(max(0, 1 - l * l));
+  } else {
+    S = a * max(0, 1 - abs((L - c) / b)**n)**(1/n); // n from super ellipse
+  }
   return pal(t, S, L);
 }
 
 private pen _palsph(
-  pen pal(real, real, real), real l, real t, real a, real b, real c)
+  pen pal(real, real, real), real l, real t, real a, real b, real c, real n)
 {
-  l = min(max(l, 0), 1);
-  real L = 2 * b * l + (c - b);
-  l = 2 * l - 1; // [0, 1] to [-1, 1]
-  real r = a * sqrt(max(0, 1 - l * l));
+  l = min(max(0, l), 1);
+  real r, L = 2 * b * l + (c - b);
+  if (n == 2) {
+    l = 2 * l - 1; // [0, 1] to [-1, 1]
+    r = a * sqrt(max(0, 1 - l * l));
+  } else {
+    r = a * max(0, 1 - abs((L - c) / b)**n)**(1/n); // n from super ellipse
+  }
   return pal(L, r * Cos(t), r * Sin(t));
 }
 
-pen palHSL(real l, real t, real a=1, real b=0.5, real c=0.5) {
-  return _palcyl2(HSL.RGB, l, t, a, b, c);
+pen palHSL(real l, real t, real a=1, real b=0.5, real c=0.5, real n=2) {
+  return _palcyl(HSL.RGB, l, t, a, b, c, n);
 }
 
-pen palHSL(real l, real t, real a, real b, real c, real n) {
-  return _palcyln(HSL.RGB, l, t, a, b, c, n);
+pen palHSI(real l, real t, real a=1, real b=0.5, real c=0.5, real n=2) {
+  return _palcyl(HSI.RGB, l, t, a, b, c, n);
 }
 
-pen palHSI(real l, real t, real a=1, real b=0.5, real c=0.5) {
-  return _palcyl2(HSI.RGB, l, t, a, b, c);
+pen palHSY(real l, real t, real a=1, real b=0.5, real c=0.5, real n=2) {
+  return _palcyl(HSY.RGB, l, t, a, b, c, n);
 }
 
-pen palHSI(real l, real t, real a, real b, real c, real n) {
-  return _palcyln(HSI.RGB, l, t, a, b, c, n);
-}
-
-pen palHSY(real l, real t, real a=1, real b=0.5, real c=0.5) {
-  return _palcyl2(HSY.RGB, l, t, a, b, c);
-}
-
-pen palHSY(real l, real t, real a, real b, real c, real n) {
-  return _palcyln(HSY.RGB, l, t, a, b, c, n);
-}
-
-pen palLab(real l, real t, real a=1, real b=0.5, real c=0.5) {
+pen palLab(real l, real t, real a=1, real b=0.5, real c=0.5, real n=2) {
   static real A = 33.2, B = 28.5, C = 63.2; // by trial and error
-  return _palsph(Lab.RGB, l, t, A * a, B * b * 2, C * c * 2);
+  return _palsph(Lab.RGB, l, t, A * a, B * b * 2, C * c * 2, n);
 }
 
-pen palLuv(real l, real t, real a=1, real b=0.5, real c=0.5) {
+pen palLuv(real l, real t, real a=1, real b=0.5, real c=0.5, real n=2) {
   static real A = 37.8, B = 36.0, C = 59.9; // by trial and error
-  return _palsph(Luv.RGB, l, t, A * a, B * b * 2, C * c * 2);
+  return _palsph(Luv.RGB, l, t, A * a, B * b * 2, C * c * 2, n);
 }
 
-pen palOKLab(real l, real t, real a=1, real b=0.5, real c=0.5) {
+pen palOKLab(real l, real t, real a=1, real b=0.5, real c=0.5, real n=2) {
   static real A = 0.106, B = 0.248, C = 0.671; // by trial and error
-  return _palsph(OKLab.RGB, l, t, A * a, B * b * 2, C * c * 2);
+  return _palsph(OKLab.RGB, l, t, A * a, B * b * 2, C * c * 2, n);
 }
 
 pen[][] colpal(

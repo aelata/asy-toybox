@@ -1,7 +1,7 @@
 ## colpal
 Color palette module
 
-```cpp {cmd=env args=[asyco -n] output=none #prep hide}
+```cpp {cmd=env args=[asyco -n] #prep output=none hide}
 import solids;
 import colpal;
 
@@ -33,7 +33,7 @@ int NLAT = 30, NLON = 90;
 pen spen = white + opacity(0.6), bpen = black + 1bp;
 ```
 
-```cpp {cmd=env args=[asyco -n] continue=prep output=none #prepCyl hide}
+```cpp {cmd=env args=[asyco -n] continue=prep #prepCyl output=none hide}
 unitsize(3cm);
 picture pic;
 unitsize(pic, 3cm);
@@ -76,7 +76,7 @@ void draw_cyl(pen palcyl(real, real), pen palsph(real, real), string z) {
 }
 ```
 
-```cpp {cmd=env args=[asyco -n] continue=prep output=none #prepLab hide}
+```cpp {cmd=env args=[asyco -n] continue=prep #prepLab output=none hide}
 triple _Lab_triple(pen p); // defined later
 
 path3 Lab_path(pen p0, pen p1, int n=16) {
@@ -121,7 +121,7 @@ void Lab_face(
 pen[] c6 = {red, yellow, green, cyan, blue, magenta};
 ```
 
-```cpp {cmd=env args=[asyco -n] output=none #prepBar hide}
+```cpp {cmd=env args=[asyco -n] #prepBar output=none hide}
 import graph;
 import palette;
 import colpal;
@@ -150,39 +150,39 @@ void draw_colpal(
 
 ### Cylindrical color space
 #### HSL
-```cpp {cmd=env args=[asyco -render 0] continue=prepCyl output=html .hide}
+```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepCyl output=html .hide}
 pen palcyl(real l, real t) { return HSL.RGB(t, 1.0, l); }
 pen palsph(real l, real t) { return palHSL(l, t); }
 draw_cyl(palcyl, palsph, "$L\ (2\times)$");
 ```
 
-```cpp {cmd=env args=[asyco] continue=prepBar output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
 unitsize(16cm / 400);
 pen pal(real l, real t) { return palHSL(l, t); }
 draw_colpal(pal, ylab="$L$");
 ```
 
 #### HSI
-```cpp {cmd=env args=[asyco -render 0] continue=prepCyl output=html .hide}
+```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepCyl output=html .hide}
 pen palcyl(real l, real t) { return HSI.RGB(t, 1.0, l); }
 pen palsph(real l, real t) { return palHSI(l, t); }
 draw_cyl(palcyl, palsph, "$I\ (2\times)$");
 ```
 
-```cpp {cmd=env args=[asyco] continue=prepBar output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
 unitsize(16cm / 400);
 pen pal(real l, real t) { return palHSI(l, t); }
 draw_colpal(pal, ylab="$I$");
 ```
 
 #### HSY
-```cpp {cmd=env args=[asyco -render 0] continue=prepCyl output=html .hide}
+```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepCyl output=html .hide}
 pen palcyl(real l, real t) { return HSY.RGB(t, 1.0, l); }
 pen palsph(real l, real t) { return palHSY(l, t); }
 draw_cyl(palcyl, palsph, "$Y\ (2\times)$");
 ```
 
-```cpp {cmd=env args=[asyco] continue=prepBar output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
 unitsize(16cm / 400);
 pen pal(real l, real t) { return palHSY(l, t); }
 draw_colpal(pal, ylab="$Y$");
@@ -190,7 +190,7 @@ draw_colpal(pal, ylab="$Y$");
 
 ### Uniform color space
 #### CIELAB
-```cpp {cmd=env args=[asyco -f svg -render 0] continue=prepLab output=html .hide}
+```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepLab output=html .hide}
 _Lab_triple = new triple(pen p) { return Lab(p).triple(); };
 pen pal(real l, real t) { return palLab(l, t); }
 real A = 33.2, B = 28.5, C = 63.2; // from palLab
@@ -227,7 +227,7 @@ for (int i: new int[] {0, 2, 4}) { // back
 }
 revolution sph =
   shift(C * Z) * scale(A, A, B) * sphere(O, 1, n=NLAT);
-pen[] cpal = colpal1(nl=NLAT, nt=NLON, pal);
+pen[] cpal = colpal1(NLAT, NLON, pal);
 draw(pic, surface(sph, n=NLON), cpal);
 // draw(pic, sph.silhouette());
 revolution sph =
@@ -236,7 +236,7 @@ draw(pic, shift(C * Z) * sph.silhouette(), bpen); // workaround
 _post_add((3.75 * 100, 0));
 ```
 
-```cpp {cmd=env args=[asyco] continue=prepBar output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
 unitsize(16cm / 400);
 pen pal(real l, real t) { return palLab(l, t); }
 real A = 33.2, B = 28.5, C = 63.2; // from palLab
@@ -244,7 +244,7 @@ draw_colpal(pal, ylab="$L*$", l=(C - B, C + B));
 ```
 
 #### CIELUV
-```cpp {cmd=env args=[asyco -f svg -render 0] continue=prepLab output=html .hide}
+```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepLab output=html .hide}
 _Lab_triple = new triple(pen p) { return Luv(p).triple(); };
 pen pal(real l, real t) { return palLuv(l, t); }
 real A = 37.8, B = 36.0, C = 59.9; // from palLuv
@@ -281,7 +281,7 @@ for (int i: new int[] {0, 2, 4}) { // back
 }
 revolution sph =
   shift(C * Z) * scale(A, A, B) * sphere(O, 1, n=NLAT);
-pen[] cpal = colpal1(nl=NLAT, nt=NLON, pal);
+pen[] cpal = colpal1(NLAT, NLON, pal);
 draw(pic, surface(sph, n=NLON), cpal);
 // draw(pic, sph.silhouette(), bpen);
 revolution sph =
@@ -290,7 +290,7 @@ draw(pic, shift(C * Z) * sph.silhouette(), bpen); // workaround
 _post_add((3.75 * 100, 0));
 ```
 
-```cpp {cmd=env args=[asyco] continue=prepBar output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
 unitsize(16cm / 400);
 pen pal(real l, real t) { return palLuv(l, t); }
 real A = 37.8, B = 36.0, C = 59.9; // from palLuv
@@ -298,7 +298,7 @@ draw_colpal(pal, ylab="$L*$", l=(C - B, C + B));
 ```
 
 #### OKLab
-```cpp {cmd=env args=[asyco -f svg -render 0] continue=prepLab output=html .hide}
+```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepLab output=html .hide}
 _Lab_triple = new triple(pen p) { return OKLab(p).triple(); };
 pen pal(real l, real t) { return palOKLab(l, t); }
 real A = 0.106, B = 0.248, C = 0.671; // from palOKLab
@@ -337,7 +337,7 @@ for (int i: new int[] {2}) // back
   draw(pic, Lab_path(black, c6[i]), grey);
 revolution sph =
   shift(C * Z) * scale(A, A, B) * sphere(O, 1, n=NLAT);
-pen[] cpal = colpal1(nl=NLAT, nt=NLON, pal);
+pen[] cpal = colpal1(NLAT, NLON, pal);
 draw(pic, surface(sph, n=NLON), cpal);
 // draw(pic, sph.silhouette(), bpen);
 revolution sph =
@@ -346,7 +346,7 @@ draw(pic, shift(C * Z) * sph.silhouette(), bpen); // workaround
 _post_add((3.75 * 0.50, 0));
 ```
 
-```cpp {cmd=env args=[asyco] continue=prepBar output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
 unitsize(16cm / 400);
 pen pal(real l, real t) { return palOKLab(l, t); }
 real A = 0.106, B = 0.248, C = 0.671; // from palOKLab
@@ -403,7 +403,7 @@ add(align(s, NE), (-1.75, 1.25h), align=SE);
 add(align(pack(Label("$n=3$", blue), "$n=2$", Label("$n=1$", red)), SE), (1, 1.25h));
 ```
 
-```cpp {cmd=env args=[asyco -render 0] continue=prep output=html #prepHSY .hide}
+```cpp {cmd=env args=[asyco -n] continue=prep #prepHSY output=none .hide}
 unitsize(3cm);
 
 triple f(real t, real a=1, real b=0.5, real c=0.5, real n=2) {
@@ -456,11 +456,11 @@ void draw_HSY(real a=1, real b=0.5, real c=0.5, real n=2) {
 ```
 
 #### HSY, n = 3 (spheroid)
-```cpp {cmd=env args=[asyco -render 0] continue=prepHSY output=html .hide}
+```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepHSY output=html .hide}
 draw_HSY(a=0.8, b=0.4, c=0.5, n=3);
 ```
 
-```cpp {cmd=env args=[asyco] continue=prepBar output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
 unitsize(16cm / 400);
 real a = 0.8, b = 0.4, c = 0.5, n = 3;
 pen pal(real l, real t) { return palHSY(l, t, a, b, c, n); }
@@ -468,11 +468,11 @@ draw_colpal(pal, ylab="$Y$", l = (c - b, c + b));
 ```
 
 #### HSY, n = 2 (sphere)
-```cpp {cmd=env args=[asyco -render 0] continue=prepHSY output=html .hide}
+```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepHSY output=html .hide}
 draw_HSY(a=0.8, b=0.4, c=0.5, n=2);
 ```
 
-```cpp {cmd=env args=[asyco] continue=prepBar output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
 unitsize(16cm / 400);
 real a = 0.8, b = 0.4, c = 0.5, n = 2;
 pen pal(real l, real t) { return palHSY(l, t, a, b, c, n); }
@@ -480,11 +480,11 @@ draw_colpal(pal, ylab="$Y$", l = (c - b, c + b));
 ```
 
 #### HSY, n = 1 (bicone)
-```cpp {cmd=env args=[asyco -render 0] continue=prepHSY output=html .hide}
+```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepHSY output=html .hide}
 draw_HSY(a=0.8, b=0.4, c=0.5, n=1);
 ```
 
-```cpp {cmd=env args=[asyco] continue=prepBar output=html .hide}
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
 unitsize(16cm / 400);
 real a = 0.8, b = 0.4, c = 0.5, n = 1;
 pen pal(real l, real t) { return palHSY(l, t, a, b, c, n); }
