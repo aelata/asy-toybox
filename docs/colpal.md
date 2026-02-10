@@ -1,4 +1,5 @@
 ## colpal
+
 Color palette module
 
 ```cpp {cmd=env args=[asyco -n] #prep output=none hide}
@@ -149,7 +150,11 @@ void draw_colpal(
 ```
 
 ### Cylindrical color space
+
+A palette with the surface color of a inscribed sphere of cylindrical color space.
+
 #### HSL
+
 ```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepCyl output=html .hide}
 pen palcyl(real l, real t) { return HSL.RGB(t, 1.0, l); }
 pen palsph(real l, real t) { return palHSL(l, t); }
@@ -163,6 +168,7 @@ draw_colpal(pal, ylab="$L$");
 ```
 
 #### HSI
+
 ```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepCyl output=html .hide}
 pen palcyl(real l, real t) { return HSI.RGB(t, 1.0, l); }
 pen palsph(real l, real t) { return palHSI(l, t); }
@@ -176,6 +182,7 @@ draw_colpal(pal, ylab="$I$");
 ```
 
 #### HSY
+
 ```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepCyl output=html .hide}
 pen palcyl(real l, real t) { return HSY.RGB(t, 1.0, l); }
 pen palsph(real l, real t) { return palHSY(l, t); }
@@ -189,7 +196,11 @@ draw_colpal(pal, ylab="$Y$");
 ```
 
 ### Uniform color space
+
+A palette with the surface color of a inscribed ellipsoid of uniform color space.
+
 #### CIELAB
+
 ```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepLab output=html .hide}
 _Lab_triple = new triple(pen p) { return Lab(p).triple(); };
 pen pal(real l, real t) { return palLab(l, t); }
@@ -244,6 +255,7 @@ draw_colpal(pal, ylab="$L*$", l=(C - B, C + B));
 ```
 
 #### CIELUV
+
 ```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepLab output=html .hide}
 _Lab_triple = new triple(pen p) { return Luv(p).triple(); };
 pen pal(real l, real t) { return palLuv(l, t); }
@@ -298,6 +310,7 @@ draw_colpal(pal, ylab="$L*$", l=(C - B, C + B));
 ```
 
 #### OKLab
+
 ```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepLab output=html .hide}
 _Lab_triple = new triple(pen p) { return OKLab(p).triple(); };
 pen pal(real l, real t) { return palOKLab(l, t); }
@@ -354,6 +367,9 @@ draw_colpal(pal, ylab="$L$", l=(C - B, C + B));
 ```
 
 ### Cylindrical color subspace
+
+A palette with the surface color of a supperellipsoid within a color cylinder.
+
 $a \in [-1, 1],\ c \in (0,1),\ c \pm b \in [0, 1],\ n \in (0,\infty)$.
 
 $$
@@ -456,6 +472,7 @@ void draw_HSY(real a=1, real b=0.5, real c=0.5, real n=2) {
 ```
 
 #### HSY, n = 3 (spheroid)
+
 ```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepHSY output=html .hide}
 draw_HSY(a=0.8, b=0.4, c=0.5, n=3);
 ```
@@ -468,6 +485,7 @@ draw_colpal(pal, ylab="$Y$", l = (c - b, c + b));
 ```
 
 #### HSY, n = 2 (sphere)
+
 ```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepHSY output=html .hide}
 draw_HSY(a=0.8, b=0.4, c=0.5, n=2);
 ```
@@ -480,6 +498,7 @@ draw_colpal(pal, ylab="$Y$", l = (c - b, c + b));
 ```
 
 #### HSY, n = 1 (bicone)
+
 ```cpp {cmd=env args=[asyco -render 0 --dothide] continue=prepHSY output=html .hide}
 draw_HSY(a=0.8, b=0.4, c=0.5, n=1);
 ```
@@ -490,5 +509,255 @@ real a = 0.8, b = 0.4, c = 0.5, n = 1;
 pen pal(real l, real t) { return palHSY(l, t, a, b, c, n); }
 draw_colpal(pal, ylab="$Y$", l = (c - b, c + b));
 ```
+
+### Uniform color subspace
+
+A palette with the surface color of a supperellipsoid within a normalized inscribed ellipsoid of uniform color space.
+
+$a \in [-1, 1],\ c \in (0,1),\ c \pm b \in [0, 1],\ n \in (0,\infty)$.
+
+$$
+\left|\frac{C}{a}\right|^n + \left|\frac{L - c}{b}\right|^n = 1
+$$
+
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
+import graph;
+
+pair f(real t, real a=1, real b=0.5, real c=0.5, real n=2) {
+  return (
+    a * sgn(Cos(t)) * abs(Cos(t))**(2 / n),
+    b * sgn(Sin(t)) * abs(Sin(t))**(2 / n) + c);
+}
+
+unitsize(3cm);
+
+real h = 2; // diameter of unit sphere
+
+xaxis(YZero, -1.5, 1.5, RightTicks(new real[] {-1, 1}), Arrow);
+yaxis(XZero, -0.25h, 1.25h, Arrow);
+label("$C$", (1.5, 0), E);
+label(format("$L\ (%g\times)$", h), (0, 1.25h), N);
+label("$O$", (0, 0), 1.5SW);
+label("$1$", (0, h), 1.5NW);
+
+draw(shift(0, 1) * unitcircle);
+
+real a = 0.8, b = 0.4, c = 0.5;
+string s = format("$a=%g, ", a) + format("b=%g, ", b) + format("c=%g$", c);
+b *= h;
+c *= h;
+dot("$c$", (0, c), 2W);
+draw("$a$", (0, c) -- (a, c), Arrow);
+draw("$b$", (0, c) -- (0, c + b), Arrow, align=W);
+
+draw(
+  graph(new pair(real t) { return f(t, a, b, c, 3); }, 0, 360),
+  blue+1bp);
+draw(
+  graph(new pair(real t) { return f(t, a, b, c, 2); }, 0, 360),
+  black+1bp);
+draw(
+  graph(new pair(real t) { return f(t, a, b, c, 1); }, 0, 360),
+  red+1bp);
+
+add(align(s, NE), (-1.75, 1.25h), align=SE);
+add(align(pack(Label("$n=3$", blue), "$n=2$", Label("$n=1$", red)), SE), (1, 1.25h));
+```
+
+#### CIELUV, n = 3 (spheroid)
+
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
+unitsize(16cm / 400);
+real a = 0.8, b = 0.4, c = 0.5, n = 3;
+pen pal(real l, real t) { return palLuv(l, t, a, b, c, n); }
+draw_colpal(pal, ylab="$Y$", l = (c - b, c + b));
+```
+
+#### CIELUV, n = 2 (sphere)
+
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
+unitsize(16cm / 400);
+real a = 0.8, b = 0.4, c = 0.5, n = 2;
+pen pal(real l, real t) { return palLuv(l, t, a, b, c, n); }
+draw_colpal(pal, ylab="$Y$", l = (c - b, c + b));
+```
+
+#### CIELUV, n = 1 (bicone)
+
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
+unitsize(16cm / 400);
+real a = 0.8, b = 0.4, c = 0.5, n = 1;
+pen pal(real l, real t) { return palLuv(l, t, a, b, c, n); }
+draw_colpal(pal, ylab="$Y$", l = (c - b, c + b));
+```
+
+<!--
+### Lightness transform
+
+Transform lightness using the inverser cumulative distribution function of a mixture of uniform and isosceles triangular distributions.
+
+#### Probability density function
+
+$$
+f(x) = \begin{dcases}
+0 & (x < 0) \\
+(1 - \alpha) + \alpha(4x) & (0 \le x \le 0.5) \\
+(1 - \alpha) + \alpha(4(1 - x)) & (0.5 \le x \le 1) \\
+0 & (1 < x)
+\end{dcases}
+$$
+
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
+import graph;
+
+real _pdf_ut(real x, real a=0) { // [0, 1] -> [0, 1]
+  if (x < 0) return 0;
+  if (1 < x) return 0;
+  if (a == 0) return 1;
+  return (x <= 0.5) ? (1 - a) + a * 4 * x : (1 - a) + a * 4 * (1 - x);
+}
+
+size(10cm);
+pair a = (0, 0), b = (1, 2);
+draw(
+  graph(new real(real x) { return _pdf_ut(x, 0.9); }, 0, 1),
+  blue, legend="$\alpha=0.9$");
+draw(
+  graph(new real(real x) { return _pdf_ut(x, 0.3); }, 0, 1),
+  magenta, legend="$\alpha=0.3$");
+draw(
+  graph(new real(real x) { return _pdf_ut(x, 0); }, 0, 1),
+  black, legend="$\alpha=0$");
+draw(
+  graph(new real(real x) { return _pdf_ut(x, -0.6); }, 0, 1),
+  red, legend="$\alpha=-0.6$");
+xaxis(Label("$x$", MidPoint), a.x, b.x, RightTicks(N=2));
+yaxis(Label("$f(x)$", MidPoint), a.y, b.y, LeftTicks(N=4));
+draw(box(a, b));
+add(legend(p=invisible, linelength=20), (1.1, 1.9));
+```
+
+#### Cumulative distribution function
+
+$$
+F(x) = \begin{dcases}
+0 & (x < 0) \\
+(1 - \alpha) x + \alpha(2x^2) & (0 \le x \le 0.5) \\
+(1 - \alpha) x + \alpha(1 - 2(1 - x)^2) & (0.5 \le x \le 1) \\
+1 & (1 < x)
+\end{dcases}
+$$
+
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
+import graph;
+
+real _cdf_ut(real x, real a=0) {
+  if (x < 0) return 0;
+  if (1 < x) return 1;
+  if (a == 0) return x;
+  return (x <= 0.5) ?
+    (1 - a) * x + a * 2 * x * x : (1 - a) * x + a * (1 - 2 * (1 - x)**2);
+}
+
+size(12cm);
+pair a = (0, 0), b = (1, 1);
+draw(
+  graph(new real(real x) { return _cdf_ut(x, 0.9); }, 0, 1),
+  blue, legend="$a=0.9$");
+draw(
+  graph(new real(real x) { return _cdf_ut(x, 0.3); }, 0, 1),
+  magenta, legend="$a=0.3$");
+draw(
+  graph(new real(real x) { return _cdf_ut(x, 0); }, 0, 1),
+  black, legend="$a=0$");
+draw(
+  graph(new real(real x) { return _cdf_ut(x, -0.6); }, 0, 1),
+  red, legend="$a=-0.6$");
+xaxis(Label("$x$", MidPoint), a.x, b.x, RightTicks(N=4));
+yaxis(Label("$F(x)$", MidPoint), a.y, b.y, LeftTicks(N=4));
+draw(box(a, b));
+add(legend(p=invisible, linelength=20), (0.05, 0.95));
+```
+
+#### Inverse cumulative distribution function
+
+$\alpha = 0$:
+$$
+F^{-1}(x) = \begin{dcases}
+0 & (x < 0) \\
+x & (0 \le x \le 1) \\
+1 & (1 < x)
+\end{dcases}
+$$
+
+$\alpha \ne 0$:
+$$
+F^{-1}(x) = \begin{dcases}
+0 & (x < 0) \\
+\frac{-(1 - \alpha) + \sqrt{(1-\alpha)^2+8\alpha x}}{4\alpha} & (0 \le x \le 0.5) \\[8pt]
+\frac{(1+3\alpha)-\sqrt{(1+3\alpha)^2-8\alpha(x+\alpha)}}{4\alpha} & (0.5 \le x \le 1) \\
+1 & (1 < x)
+\end{dcases}
+$$
+
+```cpp {cmd=env args=[asyco --dothide] output=html .hide}
+import graph;
+
+real _icdf_ut(real x, real a=0) {
+  if (x < 0) return 0;
+  if (1 < x) return 1;
+  if (a == 0) return x;
+  return (x <= 0.5) ?
+    (-(1 - a) + sqrt((1 - a)**2 + 8a * x)) / (4a) :
+    ((1 + 3a) - sqrt((1 + 3a)**2 - 8a * (x + a))) / (4a);
+}
+
+size(12cm);
+pair a = (0, 0), b = (1, 1);
+draw(
+  graph(new real(real x) { return _icdf_ut(x, 0.9); }, 0, 1),
+  blue, legend="$a=0.9$");
+draw(
+  graph(new real(real x) { return _icdf_ut(x, 0.3); }, 0, 1),
+  magenta, legend="$a=0.3$");
+draw(
+  graph(new real(real x) { return _icdf_ut(x, 0); }, 0, 1),
+  black, legend="$a=0$");
+draw(
+  graph(new real(real x) { return _icdf_ut(x, -0.6); }, 0, 1),
+  red, legend="$a=-0.6$");
+xaxis(Label("$x$", MidPoint), a.x, b.x, RightTicks(N=4));
+yaxis(Label("$F^{-1}(x)$", MidPoint), a.y, b.y, LeftTicks(N=4));
+draw(box(a, b));
+add(legend(p=invisible, linelength=20), (0.05, 0.95));
+```
+
+#### CIELUV, alpha = 0.3
+
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
+unitsize(16cm / 400);
+pen pal(real l, real t) { return palLuv(l, t, alpha=0.3); }
+real A = 0.106, B = 0.248, C = 0.671; // from palOKLab
+draw_colpal(pal, ylab="$L$", l=(C - B, C + B));
+```
+
+#### CIELUV, alpha = 0
+
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
+unitsize(16cm / 400);
+pen pal(real l, real t) { return palLuv(l, t); }
+real A = 0.106, B = 0.248, C = 0.671; // from palOKLab
+draw_colpal(pal, ylab="$L$", l=(C - B, C + B));
+```
+
+#### CIELUV, alpha = -0.3
+
+```cpp {cmd=env args=[asyco --dothide] continue=prepBar output=html .hide}
+unitsize(16cm / 400);
+pen pal(real l, real t) { return palLuv(l, t, alpha=-0.3); }
+real A = 0.106, B = 0.248, C = 0.671; // from palOKLab
+draw_colpal(pal, ylab="$L$", l=(C - B, C + B));
+```
+-->
 
 ---

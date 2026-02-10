@@ -11,10 +11,10 @@ import solids;
 import colpal;
 import isoline;
 
-private pen _pal(real l, real t) { return palLuv(l, t); } // default palette
+private int _NX = 500;   // default # of points along re-axis and im-axis
+private int _NZ = 10000; // default # of histogram bins along modulus-axis
 
-private int _NX = 500;   // # of points along real-axis
-private int _NZ = 10000; // # of histogram bins along modulus-axis
+private pen _pal(real l, real t) { return palLuv(l, t); } // default palette
 
 pair[][] map_rect(
   pair f(pair), explicit pair a, explicit pair b, int nx=_NX, int ny=nx)
@@ -152,7 +152,7 @@ int[] cumsum(int[] h) {
   return H;
 }
 
-real cdf(real l, int[] H) { // H: cumulative histogram, l: [0, 1)
+real cdf(real l, int[] H) { // l: [0, 1)
   if (l <= 0)
     return 0.0;
   if (l < 1.0 - realEpsilon) {
@@ -194,7 +194,7 @@ private real _lmax(int[] H) { // lmax from H
   return 0.0;
 }
 
-real quantile(real q, int[] H) {
+real quantile(real q, int[] H) { // q: [0, 1)
   real lmin = _lmin(H);
   real lmax = _lmax(H);
   if (q <= 0) {
@@ -389,77 +389,83 @@ string ticklbl_deg(real x) { return _ticklbl(180 * x); }
 string ticklbl_rad(real x) { return ticklbl_pi(x); }
 
 void xaxis(
-  picture pic=currentpicture, pair X, pair x, real y=0,
-  real[] pos, string[] lbl=new string[],
-  pair dir=S, pen p=currentpen, string format=_fmt)
+  picture pic=currentpicture, Label L="", pair X, pair x, real y=0,
+  pen p=currentpen,
+  real[] Pos, string[] lbl=new string[], string format=_fmt, pair dir=S)
 {
   real Xmin = X.x, Xmax = X.y;
   real xmin = x.x, xmax = x.y;
   draw(pic, (xmin, y) -- (xmax, y), p);
-  for (int i: sequence(pos.length)) {
+  for (int i: sequence(Pos.length)) {
     real x = (Xmax != Xmin) ?
-      xmin + (xmax - xmin) * (pos[i] - Xmin) / (Xmax - Xmin) :
+      xmin + (xmax - xmin) * (Pos[i] - Xmin) / (Xmax - Xmin) :
       0.5 * (xmin + xmax);
-    string s = (i < lbl.length) ? lbl[i] : format(format, pos[i]);
-    xtick(pic, (x, y), dir, p);
-    labelx(pic, s, (x, y), 3dir, p);
+    string s = (i < lbl.length) ? lbl[i] : format(format, Pos[i]);
+    xtick(pic, (x, y), unit(dir), p);
+    labelx(pic, s, (x, y), 3 * unit(dir), p);
   }
+  if (L != "")
+    label(pic, L, ((xmin + xmax) / 2, y), (abs(dir) <= 1) ? 7 * dir : dir);
 }
 
 void yaxis(
-  picture pic=currentpicture, pair Y, pair y, real x=0,
-  real[] pos, string[] lbl=new string[],
-  pair dir=W, pen p=currentpen, string format=_fmt)
+  picture pic=currentpicture, Label L="", pair Y, pair y, real x=0,
+  pen p=currentpen,
+  real[] Pos, string[] lbl=new string[], string format=_fmt, pair dir=W)
 {
   real Ymin = Y.x, Ymax = Y.y;
   real ymin = y.x, ymax = y.y;
   draw(pic, (x, ymin) -- (x, ymax), p);
-  for (int i: sequence(pos.length)) {
+  for (int i: sequence(Pos.length)) {
     real y = (Ymax != Ymin) ?
-      ymin + (ymax - ymin) * (pos[i] - Ymin) / (Ymax - Ymin) :
+      ymin + (ymax - ymin) * (Pos[i] - Ymin) / (Ymax - Ymin) :
       0.5 * (ymin + ymax);
-    string s = (i < lbl.length) ? lbl[i] : format(format, pos[i]);
-    ytick(pic, (x, y), dir, p);
-    labely(pic, s, (x, y), 3dir, p);
+    string s = (i < lbl.length) ? lbl[i] : format(format, Pos[i]);
+    ytick(pic, (x, y), unit(dir), p);
+    labely(pic, s, (x, y), 3 * unit(dir), p);
   }
+  if (L != "")
+    label(
+      pic, Label(L, embed=Rotate(N)), (x, (ymin + ymax) / 2),
+      (abs(dir) <= 1) ? 12 * dir : dir);
 }
 
 void xaxis(
-  picture pic=currentpicture, pair X, pair x, explicit real y=0, int n=1,
-  pair dir=S, pen p=currentpen, string ticklbl(real)=_ticklbl)
+  picture pic=currentpicture, Label L="", pair X, pair x, explicit real y=0,
+  pen p=currentpen, int N=1, string ticklbl(real)=_ticklbl, pair dir=S)
 {
-  real[] pos = new real[n + 1];
-  string[] lbl = new string[n + 1];
+  real[] Pos = new real[N + 1];
+  string[] lbl = new string[N + 1];
   real Xmin = X.x, Xmax = X.y;
-  for (int i: sequence(n + 1)) {
-    pos[i] = interp(Xmin, Xmax, i / n);
-    lbl[i] = ticklbl(pos[i]);
+  for (int i: sequence(N + 1)) {
+    Pos[i] = interp(Xmin, Xmax, i / N);
+    lbl[i] = ticklbl(Pos[i]);
   }
-  xaxis(pic, X, x, y, pos, lbl, dir, p);
+  xaxis(pic, L, X, x, y, p, Pos, lbl, dir);
 }
 
 void yaxis(
-  picture pic=currentpicture, pair Y, pair y, explicit real x=0, int n=1,
-  pair dir=W, pen p=currentpen, string ticklbl(real)=_ticklbl)
+  picture pic=currentpicture, Label L="", pair Y, pair y, explicit real x=0,
+  pen p=currentpen, int N=1, string ticklbl(real)=_ticklbl, pair dir=W)
 {
-  real[] pos = new real[n + 1];
-  string[] lbl = new string[n + 1];
+  real[] Pos = new real[N + 1];
+  string[] lbl = new string[N + 1];
   real Ymin = Y.x, Ymax = Y.y;
-  for (int i: sequence(n + 1)) {
-    pos[i] = interp(Ymin, Ymax, i / n);
-    lbl[i] = ticklbl(pos[i]);
+  for (int i: sequence(N + 1)) {
+    Pos[i] = interp(Ymin, Ymax, i / N);
+    lbl[i] = ticklbl(Pos[i]);
   }
-  yaxis(pic, Y, y, x, pos, lbl, dir, p);
+  yaxis(pic, L, Y, y, x, p, Pos, lbl, dir);
 }
 
 void raxis(
-  picture pic=currentpicture,
+  picture pic=currentpicture, Label L="",
   real rmax=infinity, real c=1, int nr=4, real y=-1.2, pen p=currentpen)
 {
   string lbl(real x) {
     return ticklbl_inf((c == 0) ? rmax * x : rfn(x * lfn(rmax, c), c));
   }
-  xaxis(pic, YEquals(y), 0, 1, p, RightTicks(lbl, N=nr));
+  xaxis(pic, L, YEquals(y), 0, 1, p, RightTicks(lbl, N=nr));
 }
 
 void taxis(
@@ -488,22 +494,23 @@ private void _rtpalette_colpal(
 }
 
 private void _rtpalette_taxis(
-  picture pic, pair a, pair b, pair tlim, int nt, bool flip,
-  string ticklbl(real))
+  picture pic, Label L="", pair a, pair b,
+  pair tlim, int nt, bool flip, string ticklbl(real))
 {
   if (flip)
-    xaxis(pic, tlim, (a.x, b.x), a.y, nt, S, ticklbl);
+    xaxis(pic, L, tlim, (a.x, b.x), a.y, nt, ticklbl, S);
   else
-    xaxis(pic, tlim, (a.x, b.x), b.y, nt, N, ticklbl);
+    xaxis(pic, L, tlim, (a.x, b.x), b.y, nt, ticklbl, N);
 }
 
 private void _rtpalette_raxis(
-  picture pic, pair a, pair b, pair llim, bool flop, real[] ls, string[] lbls)
+  picture pic, Label L="", pair a, pair b,
+  pair llim, bool flop, real[] ls, string[] lbls)
 {
   if (flop)
-    yaxis(pic, llim, (a.y, b.y), a.x, ls, lbls, W);
+    yaxis(pic, L, llim, (a.y, b.y), a.x, ls, lbls, W);
   else
-    yaxis(pic, llim, (a.y, b.y), b.x, ls, lbls, E);
+    yaxis(pic, L, llim, (a.y, b.y), b.x, ls, lbls, E);
 }
 
 real[] rtpalette(
@@ -512,12 +519,13 @@ real[] rtpalette(
   pair rlim=(0, infinity), int nr=8,
   pair tlim=(-1, 1), int nt=2, bool flip=false, bool flop=false,
   string format=_fmt, string ticklbl(real)=ticklbl_rad, pen p=currentpen,
-  pen pal(real, real)=_pal, bool3 reverse=default)
+  pen pal(real, real)=_pal, bool3 reverse=default,
+  Label rlabel="", Label tlabel="")
 {
   if (pic != null) {
     _rtpalette_colpal(pic, H, a, b, tlim, p, pal, reverse);
     if (0 < nt)
-      _rtpalette_taxis(pic, a, b, tlim, nt, flip, ticklbl);
+      _rtpalette_taxis(pic, tlabel, a, b, tlim, nt, flip, ticklbl);
   }
   real lmin = lfn(rlim.x, c, H);
   real lmax = (infinity <= rlim.y) ?
@@ -528,7 +536,8 @@ real[] rtpalette(
     rs[0] = rlim.x;
     rs[rs.length - 1] = rlim.y;
     if (pic != null)
-      _rtpalette_raxis(pic, a, b, (lmin, lmax), flop, ls, map(_ticklbl, rs));
+      _rtpalette_raxis(
+        pic, rlabel, a, b, (lmin, lmax), flop, ls, map(_ticklbl, rs));
     if (rs[0] == 0.0)
       rs.delete(0);
     if (0 < rs.length && infinity <= rs[rs.length - 1])
@@ -543,11 +552,12 @@ real[] rtpalette(
   pair rlim=(0, infinity), real[] rs, bool endlabels=true,
   pair tlim=(-1, 1), int nt=2, bool flip=false, bool flop=false,
   string format=_fmt, string ticklbl(real)=ticklbl_rad, pen p=currentpen,
-  pen pal(real, real)=_pal, bool3 reverse=default)
+  pen pal(real, real)=_pal, bool3 reverse=default,
+  Label rlabel="", Label tlabel="")
 {
   _rtpalette_colpal(pic, H, a, b, tlim, p, pal, reverse);
   if (0 < nt)
-    _rtpalette_taxis(pic, a, b, tlim, nt, flip, ticklbl);
+    _rtpalette_taxis(pic, tlabel, a, b, tlim, nt, flip, ticklbl);
   if (0 < rs.length) {
     real[] rs1 = rs[:]; // copy(rs)
     real[] ls1 = map(new real(real r) { return lfn(r, c, H); }, rs1);
@@ -561,12 +571,12 @@ real[] rtpalette(
     }
     pair llim = ( // lmax may be not 1 - realEpsilon but 1
       lfn(rlim.x, c, H), (infinity <= rlim.y) ? 1 : lfn(rlim.y, c, H));
-    _rtpalette_raxis(pic, a, b, llim, flop, ls1, map(_ticklbl, rs1));
+    _rtpalette_raxis(pic, rlabel, a, b, llim, flop, ls1, map(_ticklbl, rs1));
   }
   return rs;
 }
 
-void isomodulus(
+void isoabs(
   picture pic=currentpicture, real[][] r,
   explicit pair a=(-1, -1), explicit pair b=(1, 1), real[] rs,
   pen p=currentpen)
@@ -575,20 +585,20 @@ void isomodulus(
   draw(pic, g, p);
 }
 
-void isomodulus(
+void isoabs(
   picture pic=currentpicture, pair[][] z,
   explicit pair a=(-1, -1), explicit pair b=(1, 1), real[] rs,
   pen p=currentpen)
 {
-  isomodulus(pic, map(abs, z), a, b, rs, p);
+  isoabs(pic, map(abs, z), a, b, rs, p);
 }
 
-void isophase(
+void isoarg(
   picture pic=currentpicture, real[][] t,
   explicit pair a=(-1, -1), explicit pair b=(1, 1), real[] ts,
   pen p=nullpen)
 {
-  guide[][] g = isoline(t, a, b, ts, g=zc_phase);
+  guide[][] g = isoline(t, a, b, ts, g=zc_arg);
   if (p == nullpen) {
     pen[] c = sequence(
       new pen(int i) { return HSV.RGB(degrees(ts[i]), 1.0, 1.0); },
@@ -599,28 +609,73 @@ void isophase(
   }
 }
 
-void isophase(
+void isoarg(
   picture pic=currentpicture, pair[][] z,
   explicit pair a=(-1, -1), explicit pair b=(1, 1), real[] ts,
   pen p=nullpen)
 {
-  isophase(pic, map(rad, z), a, b, ts, p);
+  isoarg(pic, map(rad, z), a, b, ts, p);
 }
 
-void isophase(
+void isoarg(
   picture pic=currentpicture, real[][] t,
   explicit pair a=(-1, -1), explicit pair b=(1, 1), int nt=6)
 {
   real s = 2pi / nt;
-  guide[][] g = isoline(t, a, b, s * sequence(nt), g=zc_phase);
+  guide[][] g = isoline(t, a, b, s * sequence(nt), g=zc_arg);
   pen[] c = sequence(
     new pen(int i) { return HSV.RGB(degrees(s * i), 1.0, 1.0); }, nt);
   draw(pic, g, c);
 }
 
-void isophase(
+void isoarg(
   picture pic=currentpicture, pair[][] z,
   explicit pair a=(-1, -1), explicit pair b=(1, 1), int nt=6)
 {
-  isophase(pic, map(rad, z), a, b, nt);
+  isoarg(pic, map(rad, z), a, b, nt);
+}
+
+void domcol(
+  picture pic=currentpicture,
+  pair f(pair z)=new pair(pair z) { return z; },
+  explicit pair a=(-3, -3), explicit pair b=(3, 3),
+  real c=0, int nx=_NX, int ny=nx, int nz=_NZ,
+  bool autoscale=false, pair r=(0, infinity),
+  pen pal(real, real)=_pal, bool3 reverse=default, pen background=white,
+  ticks xticks=RightTicks(), ticks yticks=LeftTicks(),
+  bool colbar=true,
+  pair rlim=(0, 0), int nr=8, real[] rs=new real[],
+  pair tlim=(-1, 1), int nt=2, bool flip=false, bool flop=false,
+  bool isoabs=true, bool isoarg=true,
+  Label title="$f(z)$",
+  Label xlabel="$\textrm{Re}(z)$", Label ylabel="$\textrm{Im}(z)$",
+  Label rlabel="abs", Label tlabel="arg")
+{
+  pair[][] z = map_rect(f, a, b, nx, ny);
+  int[] H = image(
+    pic, z, a, b, c, nz=nz, autoscale=autoscale, r=r,
+    pal=pal, reverse=reverse, background=background);
+  xaxis(pic, xlabel, Bottom, a.x, b.x, xticks);
+  yaxis(pic, ylabel, Left, a.y, b.y, yticks);
+  if (title != "")
+    label(pic, title, ((a.x + b.x) * 0.5, b.y), align=2N);
+
+  pair pa = (b.x + (b.x - a.x) * 0.05, a.y);
+  pair pb = (b.x + (b.x - a.x) * 0.2,  b.y);
+  if (rlim == (0, 0))
+    rlim = (autoscale) ? modulus_range(c, H) : r;
+  if (rs.length == 0)
+    rs = rtpalette(
+      (colbar) ? pic : null, c, H, pa, pb, rlim, nr, tlim, nt, flip, flop,
+      rlabel=rlabel, tlabel=tlabel);
+  else
+    rtpalette(
+      (colbar) ? pic : null, c, H, pa, pb, rlim, rs, tlim, nt, flip, flop,
+      rlabel=rlabel, tlabel=tlabel);
+
+  if (isoabs)
+    isoabs(pic, z, a, b, rs);
+  if (isoarg)
+    isoarg(pic, z, a, b);
+  draw(pic, box(a, b));
 }

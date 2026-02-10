@@ -269,7 +269,8 @@ guide[][] isoline( // f(real, real) in box(a, b)
     new real(pair z) { return f(z.x, z.y); }, a, b, c, nx, ny, g, n, join);
 }
 
-real zc_phase(real t) {
+real zc_arg(real t) {
+  real T0 = pi / 6;
   t = (t + pi) % 2pi - pi;
-  return (abs(t) < pi / 6) ? t : nan;
+  return (abs(t) < T0) ? t : nan;
 }
