@@ -667,11 +667,11 @@ void domcol(
   if (rs.length == 0)
     rs = rtpalette(
       (colbar) ? pic : null, c, H, pa, pb, rlim, nr, tlim, nt, flip, flop,
-      rlabel=rlabel, tlabel=tlabel);
+      pal=pal, reverse=reverse, rlabel=rlabel, tlabel=tlabel);
   else
     rtpalette(
       (colbar) ? pic : null, c, H, pa, pb, rlim, rs, tlim, nt, flip, flop,
-      rlabel=rlabel, tlabel=tlabel);
+      pal=pal, reverse=reverse, rlabel=rlabel, tlabel=tlabel);
 
   if (isoabs)
     isoabs(pic, z, a, b, rs);
