@@ -647,7 +647,7 @@ void domcol(
   pair rlim=(0, 0), int nr=8, real[] rs=new real[],
   pair tlim=(-1, 1), int nt=2, bool flip=false, bool flop=false,
   bool isoabs=true, bool isoarg=true,
-  Label title="$f(z)$",
+  Label title="",
   Label xlabel="$\textrm{Re}(z)$", Label ylabel="$\textrm{Im}(z)$",
   Label rlabel="abs", Label tlabel="arg")
 {

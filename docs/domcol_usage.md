@@ -57,7 +57,7 @@ domcol(
   f, (-5, -5), (5, 5), reverse=true,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
   isoabs=false, isoarg=false,
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ### Color space
@@ -79,7 +79,7 @@ domcol(
   f, (-5, -5), (5, 5), pal,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
   isoabs=false, isoarg=false,
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ### Scaling along modulus-axis
@@ -112,7 +112,7 @@ domcol(
   f, (-5, -5), (5, 5), c=0,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
   isoabs=false, isoarg=false,
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 #### Manual exposure
@@ -141,7 +141,7 @@ domcol(
   f, (-5, -5), (5, 5), c=1,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
   isoabs=false, isoarg=false,
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ##### Scaling factor: c = 3
@@ -157,7 +157,7 @@ domcol(
   f, (-5, -5), (5, 5), c=3,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
   isoabs=false, isoarg=false,
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ### Modulus range
@@ -175,7 +175,7 @@ domcol(
   f, (-5, -5), (5, 5), c=3, r=(0.3, 30),
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
   isoabs=false, isoarg=false,
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 You can also set an approximate modulus range with `autoscale=true` and `r` with the lower and the upper quantiles.
@@ -192,7 +192,7 @@ domcol(
   autoscale=true, r=(0.01, 0.9), // trim lower 1% and upper 10%
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
   isoabs=false, isoarg=false,
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ### Combining fuctions

@@ -14,7 +14,7 @@ pair f(pair z) { return z; }
 domcol(
   f, (-5, -5), (5, 5), c=0, reverse=true,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ### Linear transform
@@ -40,7 +40,7 @@ pair f(pair z) { return (0, 0, 1, -1, 1, 3) * z; }
 domcol(
   f, (-5, -5), (5, 5), c=0, reverse=true,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ### Rational function
@@ -60,7 +60,7 @@ domcol(
   f, (-5, -5), (5, 5), c=0, reverse=true,
   rs=new real[] {1, 2, 4, 8, 16, 32},
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ### Exponential function
@@ -78,7 +78,7 @@ pair f(pair z) { return exp(z); }
 domcol(
   f, (-5, -5), (5, 5), c=0, reverse=true,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 <div style="break-after:page"></div>
 
@@ -98,7 +98,7 @@ domcol(
   f, (-5, -5), (5, 5), c=0, reverse=true,
   rs=new real[] {0.707, 1, 2, 5, 10, 20},
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 $$
@@ -116,7 +116,7 @@ domcol(
   f, (-5, -5), (5, 5), c=0, reverse=true,
   rs=new real[] {0.707, 1, 2, 5, 10, 20},
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 <div style="break-after:page"></div>
 
@@ -136,7 +136,7 @@ domcol(
   f, (-5, -5), (5, 5), c=0, reverse=true,
   rs=new real[] {0.707, 1, 2, 5, 10, 20},
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 $$
@@ -154,7 +154,7 @@ domcol(
   f, (-5, -5), (5, 5), c=0, reverse=true,
   rs=new real[] {0.707, 1, 2, 5, 10, 20},
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 <div style="break-after:page"></div>
@@ -175,7 +175,7 @@ pair f(pair z) { return log(z); }
 domcol(
   f, (-5, -5), (5, 5), c=0, reverse=true,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 $$
@@ -192,7 +192,7 @@ pair f(pair z) { z = (0, 1) * z; return 1 / (0, 0.5) * log((1 + z) / (1 - z)); }
 domcol(
   f, (-3, -3), (3, 3), c=0, reverse=true,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 $$
@@ -209,7 +209,7 @@ pair f(pair z) { return 0.5 * log((1 + z) / (1 - z)); }
 domcol(
   f, (-3, -3), (3, 3), c=0, reverse=true,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ### Power function
@@ -232,7 +232,7 @@ pair f(pair z) { return z * z; }
 domcol(
   f, (-3, -3), (3, 3), c=0, reverse=true,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 $$
@@ -249,7 +249,7 @@ pair f(pair z) { return sqrt(z); }
 domcol(
   f, (-3, -3), (3, 3), c=0, reverse=true,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 $$
@@ -266,7 +266,7 @@ pair f(pair z) { return z**(0,1); }
 domcol(
   f, (-3, -3), (3, 3), c=0, reverse=true,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 $$
@@ -283,7 +283,7 @@ pair f(pair z) { return z^(2, 1); }
 domcol(
   f, (-3, -3), (3, 3), c=0, reverse=true,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ### Gamma function
@@ -303,7 +303,7 @@ domcol(
   f, (-5, -5), (5, 5), c=0.5,
   xticks=RightTicks(N=2, n=5), yticks=LeftTicks(N=2, n=5),
   isoabs=false,
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 <div style="break-after:page"></div>
@@ -339,7 +339,7 @@ domcol(
   f, (-2, -1.5), (1, 1.5), c=3,
   xticks=RightTicks(N=6), yticks=LeftTicks(N=6),
   isoabs=false, isoarg=false,
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ### Intersting looking function
@@ -361,7 +361,7 @@ domcol(
   f, (-2, -2), (2, 2), c=0, pal,
   xticks=RightTicks(N=2, n=2), yticks=LeftTicks(N=2, n=2),
   isoabs=false,
-  title="", xlabel="", ylabel="", rlabel="", tlabel="");
+  xlabel="", ylabel="", rlabel="", tlabel="");
 ```
 
 ---
