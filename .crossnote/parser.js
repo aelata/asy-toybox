@@ -4,7 +4,7 @@
 
   onWillParseMarkdown: async function(markdown) {
     markdown = markdown.replace(
-      /\[([^\]]+)\]\(([^)]+).md(#.*)\)/g, "[$1]($2.html$3)");
+      /\[([^\]]+)\]\(([^)]+).md(#.*)?\)/g, "[$1]($2.html$3)");
     return markdown;
   },
 
