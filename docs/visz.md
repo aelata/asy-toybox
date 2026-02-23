@@ -275,7 +275,7 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable
 
 ## Domain coloring
 
-Representing the input $z$ as a position of the complex plane and the output $f(x) as color
+Representing the input $z$ as a position of the complex plane and the output $f(z)$ as color
 
 [　　Wikipedia page of domain coloring](https://en.wikipedia.org/wiki/Domain_coloring)
 
