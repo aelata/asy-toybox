@@ -77,7 +77,7 @@ center((0, 15));
 
 ### {.r-stretch}
 
-### $\{(x, y)\} \subset \mathbb{R}^2$ (2-dimensional graph){.c}
+### $\{(x, y)\} \subset \mathbb{R}^2$ (2D graph){.c}
 
 <!-- .slide -->
 
@@ -126,7 +126,7 @@ center();
 
 ### {.r-stretch}
 
-### $\{(x, y, u, v)\}\subset\mathbb{R}^4$（4-dimensional graph）{.c}
+### $\{(x, y, u, v)\}\subset\mathbb{R}^4$（4D graph）{.c}
 
 <!-- .slide -->
 
@@ -158,7 +158,7 @@ splot [-5:5][-5:5][-60:60] imag(f(x + I * y))
 
 ### { .r-stretch}
 
-### Difficult to intuitively identify the positions of zeros and poles {.c}
+### Difficulty in intuitively identifying zeros and poles {.c}
 
 <!-- .slide -->
 
@@ -191,7 +191,7 @@ splot [-5:5][-5:5][-pi:pi] arg(f(x + I * y))
 
 ### {.r-stretch}
 
-### Height discontinuity of arguments $\theta$ at $-\pi$ and $\pi$ {.c}
+### Height discontinuity for arguments $\theta$ at $-\pi$ and $\pi$ {.c}
 
 <!-- .slide -->
 
@@ -232,7 +232,7 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable
 
 ### {.r-stretch}
 
-### Representing complex vales as colors (lightness and hue)? {.c}
+### No hue discontinuity for arguments $\theta$ at $-\pi$ and $\pi$ {.c}
 
 <!-- .slide vertical=true -->
 
@@ -275,9 +275,9 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable
 
 ## Domain coloring
 
-Representing the input $z$ as a position of the complex plane and the output $f(z)$ as color
+Representing the input $z$ as a position in the complex plane and the output $f(z)$ as color
 
-[　　Wikipedia page of domain coloring](https://en.wikipedia.org/wiki/Domain_coloring)
+[　　Wikipedia page of "domain coloring"](https://en.wikipedia.org/wiki/Domain_coloring)
 
 <br>
 
@@ -314,10 +314,9 @@ draw(-sqrt((-2, -2)), scale(6) * Mark[5]);
 draw( sqrt((-2, -2)), scale(6) * Mark[5]);
 ```
 
-![](fig-7.svg){width=43% .C}
+![](fig-7.svg){width=40% .C}
 
-Zeros: $1,\ -1,\ 2+i$ (Multiplicity 2)
-Poles: $\sqrt{-2-2\,i}\approx0.643-1.553\,i,\ -\sqrt{-2-2\,i}$
+#### Zeros: $1,\ -1,\ 2+i$ (Multiplicity 2) <br> Poles: $\sqrt{-2-2\,i}\approx0.643-1.553\,i,\ -\sqrt{-2-2\,i}$ {.c}
 
 <!-- .slide -->
 
@@ -361,9 +360,9 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable nocontou
   '++' using 1:2:(abs(f($1 + I * $2))) with lines lc "black" nosurface
 ```
 
-* gnuplot is lightweight and fast
+* Lightweight and fast tool
 * Noticeable color streaks with non-uniform HSV color space
-* Drawing method of the isoline of argument not found
+* Unavailability of a method for drawing the isoline of argument
 
 <!-- .slide -->
 
@@ -388,7 +387,7 @@ dev.off()
 <br>
 
 * Beautiful visualization (follows [the Wegret's book](https://link.springer.com/book/10.1007/978-3-0348-0180-5))
-* Unable to distinguish zeros and poles with isolines of absolute values
+* Difficulty in distinguishing zeros and poles with isolines of absolute values
 
 <!-- .slide -->
 
@@ -414,7 +413,7 @@ p.savefig("ex-cplot.svg", format="svg")
 <br>
 
 * No noticeable color streaks with uniform OKLab color space
-* Familiarization may be required for absolute value scaling (high saturated visualization)
+* Need for familiarization for absolute value scaling (high saturated visualization)
 
 <!-- .slide -->
 
@@ -442,21 +441,23 @@ domcol(
 ```
 <br>
 
-* Color can be modified in various color space such as HSY, Lab, and OKLab
-* Autoscaling of absolute value axis (auto exposure)
+* Autoscaling along absolute value axis (auto exposure)
+* Color adjustment in various color space such as HSY, Lab, and OKLab
 * Slightly slow drawing speed
-* Setting tp a TeX Live environment is time-consuming
+* Time-consuming setup of the TeX Live environment
 
 <!-- .slide -->
 
 ## Summary
 
 ### Domain coloring
-* Visualization of complex functions by representing the input $z$ as a position of the complex plane and the output $f(x) as color
+* Visualization of complex functions by representing:
+  + the input $z$ as a position in the complex plane
+  + the output $f(z)$ as color
 <br>
 
 ### Tools
-* Domain coloing is available in gnuplot, R, Python, and Asymptote
+* Domain coloring availabilty in gnuplot, R, Python, and Asymptote
 
 <!-- .slide data-visibility="uncounted" data-background-color="lightgray" data-background-transition="none" -->
 

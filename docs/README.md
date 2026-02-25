@@ -11,7 +11,7 @@ This repository contains [Asymptote](https://github.com/vectorgraphics/asymptote
 * domcol.asy - domain coloring of complex functions
   + [usage](domcol_usage.md)
   + [gallery](domcol_gallery.md)
-  + [presentation](visz.md)
+  + [presentation](visz.md) $\;$ [ [ja](ja/visz.md) ]
 * geom2.asy - miscellaneous 2D geometry functions
   + [example](geom2_example.md)
 * geom3.asy - miscellaneous 3D geometry functions

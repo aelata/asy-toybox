@@ -7,14 +7,11 @@
   .katex-html { font-size: 0.9em; }
   .katex-display { font-size: 0.9em; }
 
-  .C {
-    display: block;
-    margin: auto;
-  }
+  .C { display: block; margin: auto; }
 
   .l { text-align: left; }
-  .c { text-align: center; }
-  .r { text-align: right; }
+  .c { text-align: left; width: fit-content; margin: auto; }
+  .r { text-align: left; width: fit-content; margin-left: auto; }
   .hr {
     padding-bottom: 0.3em;
     line-height: 1.2;
@@ -26,7 +23,7 @@
 
   .hide { display: none; } // for code chunks
 
-  h1 { font-size: 2.0em; .c; translate: 0% 30%; text-transform: none; }
+  h1 { font-size: 2.0em; text-align: center; translate: 0% 30%; text-transform: none; }
   h2 { font-size: 1.5em; .l; .hr; }
   h3 { font-size: 1.2em; .l; }
   h4 { font-size: 1.0em; .l; }

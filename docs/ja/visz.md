@@ -191,7 +191,7 @@ splot [-5:5][-5:5][-pi:pi] arg(f(x + I * y))
 
 ### {.r-stretch}
 
-### 高さでは偏角 $\theta$ の $-\pi$ と $\pi$ が不連続 {.c}
+### 高さでは偏角 $\theta$ が $-\pi$ と $\pi$ で不連続 {.c}
 
 <!-- .slide -->
 
@@ -232,7 +232,7 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable
 
 ### {.r-stretch}
 
-### 明るさと色相を合わせた「色」で複素数を表現可能？ {.c}
+### 色相では偏角 $\theta$ が $-\pi$ と $\pi$ で連続 {.c}
 
 <!-- .slide vertical=true -->
 
@@ -281,7 +281,7 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable
 
 <br>
 
-ここでは次の 4 つの道具を紹介：
+ここでは次の 4 つのツールを紹介：
 
 * gnuplot
 * viscomplexr (R 言語)
@@ -314,16 +314,15 @@ draw(-sqrt((-2, -2)), scale(6) * Mark[5]);
 draw( sqrt((-2, -2)), scale(6) * Mark[5]);
 ```
 
-![](fig-7.svg){width=43% .C}
+![](fig-7.svg){width=40% .C}
 
-零点：$1,\ -1,\ 2+i\!\!$（重複度 2）
-極：$\sqrt{-2-2\,i}\approx0.643-1.553\,i,\ -\sqrt{-2-2\,i}$
+#### 零点：$1,\ -1,\ 2+i\!\!$（重複度 2） <br> 極：$\sqrt{-2-2\,i}\approx0.643-1.553\,i,\ -\sqrt{-2-2\,i}$ {.c}
 
 <!-- .slide -->
 
 ## gnuplot
 
-[gnuplot](http://www.gnuplot.info) は複素数に対応したグラフ作成ソフトウェア
+[gnuplot](http://www.gnuplot.info) は広く用いられ複素数に対応するグラフ作成ソフトウェア
 
 ![](ex-gnuplot.svg){.C width=60%}
 
@@ -361,7 +360,7 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable nocontou
   '++' using 1:2:(abs(f($1 + I * $2))) with lines lc "black" nosurface
 ```
 
-* gnuplot は軽量で高速、広く長く利用されている
+* 軽量で高速なツール
 * HSV 色空間が均等色空間でないため色の筋が目立つ
 * 偏角の等値線を描く方法は見つけられていない
 
@@ -388,7 +387,7 @@ dev.off()
 <br>
 
 * 美しい可視化（[Wegret の本](https://link.springer.com/book/10.1007/978-3-0348-0180-5)に準拠）
-* 絶対値を等値線で表すため、極と零点の区別が難しい
+* 絶対値を等値線で表すため極と零点の区別が難しい
 
 <!-- .slide -->
 
@@ -442,10 +441,10 @@ domcol(
 ```
 <br>
 
-* 様々な色空間（HSY, Lab, OKLab など）で色を調整可能
-* 絶対値の軸の自動伸縮（自動露出）
+* 絶対値の軸の自動縮尺（自動露出）
+* 様々な色空間（HSY, Lab, OKLab など）での色調整
 * 少し遅い描画速度
-* TeX Live 環境の構築は手間
+* TeX Live 環境の構築に手間
 
 <!-- .slide -->
 
@@ -455,7 +454,7 @@ domcol(
 * 入力 $z$ を複素平面の位置で、出力 $f(z)$ を色で表すことで<br>複素関数を可視化
 <br>
 
-### 道具
+### ツール
 * gnuplot、R 言語、Python 言語、Asymptote 言語などで<br>定義域の彩色を利用可能
 
 <!-- .slide data-visibility="uncounted" data-background-color="lightgray" data-background-transition="none" -->
