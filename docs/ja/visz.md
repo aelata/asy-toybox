@@ -4,11 +4,12 @@ presentation:
   center: false # disable vertical centering
   slideNumber: "c/t"
   transition: none
+  backgroundTransition: none
 ---
 
 ![](style.less)
 
-<!-- .slide data-background-image="ex-domcol.svg" data-background-size=60% data-background-opacity=0.1 data-background-transition="none" -->
+<!-- .slide data-background-image="ex-domcol.svg" data-background-size=60% data-background-opacity=0.1 -->
 
 # 複素関数の可視化 {.r-stretch}
 
@@ -30,6 +31,17 @@ void center(picture pic=currentpicture, pair O=(0, 0), bool vertical=false) {
 ```
 
 #### aelata {.r}
+
+<!-- slide -->
+## はじめに
+
+### 目的
+複素関数の特徴の把握を容易にする
+<br>
+
+### 手段
+* 実関数のグラフに似た、複素関数の可視化
+* 可視化ツール
 
 <!-- .slide -->
 
@@ -316,13 +328,13 @@ draw( sqrt((-2, -2)), scale(6) * Mark[5]);
 
 ![](fig-7.svg){width=40% .C}
 
-#### 零点：$1,\ -1,\ 2+i\!\!$（重複度 2） <br> 極：$\sqrt{-2-2\,i}\approx0.643-1.553\,i,\ -\sqrt{-2-2\,i}$ {.c}
+#### 零点：$1,\ -1,\ 2+i\!\!$（重複度 2） <br> 極：$\sqrt{-2-2\,i}\approx0.643-1.553\,i,\ -\sqrt{-2-2\,i}$ {.cl}
 
 <!-- .slide -->
 
 ## gnuplot
 
-[gnuplot](http://www.gnuplot.info) は広く用いられ複素数に対応するグラフ作成ソフトウェア
+[gnuplot](http://www.gnuplot.info) は複素数に対応したグラフ作成ソフトウェア
 
 ![](ex-gnuplot.svg){.C width=60%}
 
@@ -360,7 +372,7 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable nocontou
   '++' using 1:2:(abs(f($1 + I * $2))) with lines lc "black" nosurface
 ```
 
-* 軽量で高速なツール
+* 広く用いられている軽量で高速なツール
 * HSV 色空間が均等色空間でないため色の筋が目立つ
 * 偏角の等値線を描く方法は見つけられていない
 
@@ -370,7 +382,7 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable nocontou
 
 [viscomplexr](https://github.com/PeterBiber/viscomplexr/) は [R 言語](https://www.r-project.org) による複素関数の相図を描くパッケージ
 
-![](ex-viscomplexr.svg){.C width=64%}
+![](ex-viscomplexr.svg){.C width=54%}
 
 <!-- .slide vertical=true -->
 
@@ -379,7 +391,7 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable nocontou
 ```R {cmd=Rscript args=["--no-save", "$input_file"] output=none}
 library(viscomplexr)
 library(svglite)
-svglite("ex-viscomplexr.svg") # svg() may be not preferable
+svglite("ex-viscomplexr.svg", 8, 8) # svg() may be not preferable
 f <- function(z) { (z * z - 1) * (z - (2 + 1i))^2 / (z * z + (2 + 2i)); }
 phasePortrait(f, xlim = c(-5, 5), ylim = c(-5, 5))
 dev.off()
@@ -393,7 +405,7 @@ dev.off()
 
 ## cplot
 
-[cplot](https://github.com/nschloe/cplot) は [Python 言語](https://www.python.org) による複素関数プロットのためのパッケージ
+[cplot](https://github.com/nschloe/cplot) は [Python 言語](https://www.python.org) による複素関数プロットのパッケージ
 
 ![](ex-cplot.svg){.C}
 
@@ -457,7 +469,7 @@ domcol(
 ### ツール
 * gnuplot、R 言語、Python 言語、Asymptote 言語などで<br>定義域の彩色を利用可能
 
-<!-- .slide data-visibility="uncounted" data-background-color="lightgray" data-background-transition="none" -->
+<!-- .slide data-visibility="uncounted" data-background-color="lightgray" -->
 
 <!-- .slide data-visibility="uncounted" -->
 

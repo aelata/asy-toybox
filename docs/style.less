@@ -1,18 +1,36 @@
 .reveal {
-  font-family: "Lato", sans-serif;
+  .b { font-weight: bold; }
+  .red { color: darkred; }
+  .grn { color: darkgreen; }
+  .blu { color: darkblue; }
+
   font-size: 32px;
-  font-weight: normal;
-  color: #000;
+
+  h1 { font-size: 2.0em; .b; }
+  h2 { font-size: 1.5em; .b; }
+  h3 { font-size: 1.2em; }
+  h4 { font-size: 1.0em; }
+  h5 { font-size: 0.8em; }
+  h6 { font-size: 0.5em; }
+  table, code { font-size: 0.9em; }
 
   .katex-html { font-size: 0.9em; }
   .katex-display { font-size: 0.9em; }
 
+  code { white-space: pre-wrap !important; }
+
+  .L { display: block; margin-right: auto; }
   .C { display: block; margin: auto; }
+  .R { display: block; margin-left: auto; }
 
   .l { text-align: left; }
-  .c { text-align: left; width: fit-content; margin: auto; }
-  .r { text-align: left; width: fit-content; margin-left: auto; }
-  .hr {
+  .c { text-align: center; }
+  .r { text-align: right; }
+  .cl { text-align: left; width: fit-content; margin: auto; }
+  .rl { text-align: left; width: fit-content; margin-left: auto; }
+
+  h1 { .c; translate: 0% 25%; }
+  h2 {
     padding-bottom: 0.3em;
     line-height: 1.2;
     border-color: gray;
@@ -23,26 +41,11 @@
 
   .hide { display: none; } // for code chunks
 
-  h1 { font-size: 2.0em; text-align: center; translate: 0% 30%; text-transform: none; }
-  h2 { font-size: 1.5em; .l; .hr; }
-  h3 { font-size: 1.2em; .l; }
-  h4 { font-size: 1.0em; .l; }
-  h5 { font-size: 0.8em; .l; }
-  h6 { font-size: 0.5em; .l; }
-
-  ul, ol, dl {
-    display: block;
-    text-align: left;
-    margin-left: 1.5em;
-  }
-
-  p {
-    text-align: left;
-    translate: 3%;
-  }
-
-  pre code {
-    font-size: 0.9em;
-    white-space: pre-wrap !important;
+  /* for left aligned slides */
+  h2, h3, h4, h5, h6 { .l }
+  h4 { margin-left: 1em; }
+  section {
+    > p { .l; margin-left: 1em; }
+    > ul, > ol, > dl { display: block; .l; margin-left: 1.5em; }
   }
 }

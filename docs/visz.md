@@ -4,11 +4,12 @@ presentation:
   center: false # disable vertical centering
   slideNumber: "c/t"
   transition: none
+  backgroundTransition: none
 ---
 
 ![](style.less)
 
-<!-- .slide data-background-image="ex-domcol.svg" data-background-size=60% data-background-opacity=0.1 data-background-transition="none" -->
+<!-- .slide data-background-image="ex-domcol.svg" data-background-size=60% data-background-opacity=0.1 -->
 
 # Visualization of complex functions {.r-stretch}
 
@@ -30,6 +31,17 @@ void center(picture pic=currentpicture, pair O=(0, 0), bool vertical=false) {
 ```
 
 #### aelata {.r}
+
+<!-- slide -->
+## Introduction
+
+### Purpose
+Facilitating a grasp of the characteristics of complex functions
+<br>
+
+### Means
+* Visualization of complex functions similar to the graph of real functions
+* Visualization tools
 
 <!-- .slide -->
 
@@ -292,7 +304,7 @@ Other [MATLAB](https://mathworks.com/products/matlab.html) tools are also availa
 
 <!-- .slide -->
 
-## Example of complex function
+## Example of a complex function
 $$
 f(z) = \frac{(z^2 - 1)(z - 2 - i)^2}{z^2 + 2 + 2i}
 $$
@@ -316,13 +328,13 @@ draw( sqrt((-2, -2)), scale(6) * Mark[5]);
 
 ![](fig-7.svg){width=40% .C}
 
-#### Zeros: $1,\ -1,\ 2+i$ (Multiplicity 2) <br> Poles: $\sqrt{-2-2\,i}\approx0.643-1.553\,i,\ -\sqrt{-2-2\,i}$ {.c}
+#### Zeros: $1,\ -1,\ 2+i$ (Multiplicity 2) <br> Poles: $\sqrt{-2-2\,i}\approx0.643-1.553\,i,\ -\sqrt{-2-2\,i}$ {.cl}
 
 <!-- .slide -->
 
 ## gnuplot
 
-[gnuplot](http://www.gnuplot.info) is a widely used graphing software that supports complex number
+[gnuplot](http://www.gnuplot.info) is graphing software that supports complex numbers
 
 ![](ex-gnuplot.svg){.C width=60%}
 
@@ -360,7 +372,7 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable nocontou
   '++' using 1:2:(abs(f($1 + I * $2))) with lines lc "black" nosurface
 ```
 
-* Lightweight and fast tool
+* Widely used, lightweight, and fast tool
 * Noticeable color streaks with non-uniform HSV color space
 * Unavailability of a method for drawing the isoline of argument
 
@@ -370,7 +382,7 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable nocontou
 
 [viscomplexr](https://github.com/PeterBiber/viscomplexr/) is a package to create phase portraits in [the R language](https://www.r-project.org)
 
-![](ex-viscomplexr.svg){.C width=64%}
+![](ex-viscomplexr.svg){.C width=54%}
 
 <!-- .slide vertical=true -->
 
@@ -379,7 +391,7 @@ splot [-5:5][-5:5] '++' using 1:2:(pal(f($1 + I * $2))) lc rgb variable nocontou
 ```R {cmd=Rscript args=["--no-save", "$input_file"] output=none}
 library(viscomplexr)
 library(svglite)
-svglite("ex-viscomplexr.svg") # svg() may be not preferable
+svglite("ex-viscomplexr.svg", 8, 8) # svg() may be not preferable
 f <- function(z) { (z * z - 1) * (z - (2 + 1i))^2 / (z * z + (2 + 2i)); }
 phasePortrait(f, xlim = c(-5, 5), ylim = c(-5, 5))
 dev.off()
@@ -452,14 +464,14 @@ domcol(
 
 ### Domain coloring
 * Visualization of complex functions by representing:
-  + the input $z$ as a position in the complex plane
-  + the output $f(z)$ as color
+  + Input $z$ as a position in the complex plane
+  + Output $f(z)$ as color
 <br>
 
 ### Tools
-* Domain coloring availabilty in gnuplot, R, Python, and Asymptote
+* Availability of domain coloring in gnuplot, R, Python, and Asymptote
 
-<!-- .slide data-visibility="uncounted" data-background-color="lightgray" data-background-transition="none" -->
+<!-- .slide data-visibility="uncounted" data-background-color="lightgray" -->
 
 <!-- .slide data-visibility="uncounted" -->
 
